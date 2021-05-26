@@ -1,0 +1,18 @@
+local keydir = {[-1]="A", [1]="D"}
+local speed = 100
+
+function OnEvent(event, arg)
+   if event == "MOUSE_BUTTON_PRESSED" and arg == 5 and IsKeyLockOn("numlock") then --- TRAVAO DE SEGURANCA
+      local dir = -1
+      repeat
+         dir = -dir  --- Alternador
+         local time0 = GetRunningTime()
+         repeat
+            MoveMouseRelative(dir*speed*3, -dir*speed)
+            Sleep(15)
+         until GetRunningTime() - time0 > 5
+         PressAndReleaseKey(keydir[dir])
+         Sleep(15)
+      until not IsMouseButtonPressed(5)
+   end
+end
